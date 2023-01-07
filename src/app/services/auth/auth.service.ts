@@ -10,4 +10,8 @@ export class AuthService {
   signup(data: any) {
     return this.http.makePostRequest('auth/register', data);
   }
+
+  login(data: any) {
+    return this.http.makePostRequest('auth/login', data);
+  }
 }

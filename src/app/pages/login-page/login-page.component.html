@@ -1,1 +1,100 @@
-<h1>login-page works!</h1>
+<app-landing-navbar></app-landing-navbar>
+<div>
+  <div class="col-sm-12 col-md-6 col-lg-4 container">
+    <form
+      class="form-container"
+      [formGroup]="loginForm"
+      (ngSubmit)="loginUser()"
+    >
+      <h3 class="mb-4 text-center">Login</h3>
+      <div class="form-group mb-4">
+        <label class="mb-2" for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          aria-describedby="emailHelp"
+          placeholder="Enter email"
+          formControlName="email"
+          required
+        />
+        <div
+          *ngIf="
+            formControls.email.invalid &&
+            (formControls.email.dirty || formControls.email.touched)
+          "
+        >
+          <div
+            *ngIf="formControls.email.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Email is required
+          </div>
+          <div
+            *ngIf="formControls.email.errors?.['pattern']"
+            class="alert alert-danger"
+          >
+            Email is invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-1">
+        <label class="mb-2" for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Enter password"
+          formControlName="password"
+          required
+        />
+
+        <div
+          *ngIf="
+            formControls.password.invalid &&
+            (formControls.password.dirty || formControls.password.touched)
+          "
+        >
+          <div
+            *ngIf="formControls.password.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Password is required
+          </div>
+          <div
+            *ngIf="formControls.password.errors?.['minlength']"
+            class="alert alert-danger"
+          >
+            Password must be at least 8 characters long.
+          </div>
+          <div
+            *ngIf="formControls.password.errors?.['pattern']"
+            class="alert alert-danger"
+          >
+            Password should be a combination of letters and numbers.
+          </div>
+        </div>
+      </div>
+      <p class="d-flex justify-content-end">
+        <a class="forgot-password-link" href="/forgot-password">
+          Forgot Password?
+        </a>
+      </p>
+      <button
+        type="submit"
+        class="col-12 mt-2 btn btn-dark btn-lg"
+        [disabled]="!loginForm.valid"
+      >
+        Login
+      </button>
+      <br />
+      <div class="mt-4">
+        <div class="text-center">
+          Don't have an account yet?
+          <a class="signup-link" href="/signup"> Register </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
