@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingNavbarComponent } from './components/landing-navbar/landing-navbar.component';
@@ -29,7 +33,20 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     SinglePostComponent,
     LandingNavbarComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
