@@ -13,11 +13,15 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
-  { path: 'posts', component: PostPageComponent },
+  { path: 'posts', pathMatch: 'full', component: PostPageComponent },
+  {
+    path: 'posts/create-post',
+    pathMatch: 'full',
+    component: CreatePostComponent,
+  },
+  { path: 'posts/search', pathMatch: 'full', component: SearchPageComponent },
   { path: 'posts/:postId', component: SinglePostComponent },
   { path: 'posts/edit-post/:postId', component: EditPostComponent },
-  { path: 'posts/create-post', component: CreatePostComponent },
-  { path: 'search', component: SearchPageComponent },
   { path: '**', redirectTo: '' },
 ];
 
