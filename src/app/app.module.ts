@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +20,7 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
 import { SinglePostComponent } from './pages/post-page/single-post/single-post.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { TokenInterceptorService } from './services/token/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,13 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
       progressBar: true,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { encrypt } from 'src/app/utils';
 
 @Component({
   selector: 'app-login-page',
@@ -52,11 +53,17 @@ export class LoginPageComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe({
       next: (res: any) => {
         this.loading = false;
+        const { id, firstName, accessToken, refreshToken } = res.data;
+        const encryptedData = encrypt({ accessToken, refreshToken });
+        localStorage.setItem('session', encryptedData);
+        localStorage.setItem('user', JSON.stringify({ id, firstName }));
+
         this.toast.success(res.message);
         this.router.navigate(['/posts']);
       },
       error: (err) => {
         this.loading = false;
+        console.log('err', err);
         this.toast.error(err.error.message);
       },
     });
