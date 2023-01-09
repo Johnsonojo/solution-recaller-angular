@@ -1,0 +1,15 @@
+<div class="card h-100">
+  <img
+    src="{{ post.imageUrl || '../../../../../assets/images/code.jpg' }}"
+    class="card-img-top"
+    alt="{{ post.problemTitle }}"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ post.problemTitle }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ post.problemDescription }}</h6>
+    <p class="card-text">
+      {{ post.problemSolution }}
+    </p>
+    <a href="/posts/{{ post.id }}" class="btn btn-dark">View Details</a>
+  </div>
+</div>

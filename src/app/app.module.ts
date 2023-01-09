@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingNavbarComponent } from './components/landing-navbar/landing-navbar.component';
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -34,6 +35,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     SinglePostComponent,
     LandingNavbarComponent,
     MainNavbarComponent,
+    PostCardComponent,
   ],
   imports: [
     BrowserModule,
