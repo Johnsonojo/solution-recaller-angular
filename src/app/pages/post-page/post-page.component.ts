@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
   selector: 'app-post-page',
@@ -6,40 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-page.component.scss'],
 })
 export class PostPageComponent implements OnInit {
-  constructor() {}
+  postData!: any[];
+  errorMessage!: string;
 
-  ngOnInit(): void {}
+  constructor(private postService: PostService) {}
 
-  postData = [
-    {
-      id: 'iDOne',
-      problemTitle: 'Problem Title 1',
-      problemDescription: 'Problem Description 1',
-      problemSolution: 'Problem Solution 1',
-    },
-    {
-      id: 'iDTwo',
-      problemTitle: 'Problem Title 2',
-      problemDescription: 'Problem Description 2',
-      problemSolution: 'Problem Solution 2',
-    },
-    {
-      id: 'iDThree',
-      problemTitle: 'Problem Title 3',
-      problemDescription: 'Problem Description 3',
-      problemSolution: 'Problem Solution 3',
-    },
-    {
-      id: 'iDFour',
-      problemTitle: 'Problem Title 4',
-      problemDescription: 'Problem Description 4',
-      problemSolution: 'Problem Solution 4',
-    },
-    {
-      id: 'iDFive',
-      problemTitle: 'Problem Title 5',
-      problemDescription: 'Problem Description 5',
-      problemSolution: 'Problem Solution 5',
-    },
-  ];
+  ngOnInit(): void {
+    this.getAllPosts();
+  }
+
+  getAllPosts() {
+    this.postService.getAllPosts().subscribe({
+      next: (res: any) => {
+        this.postData = res.data;
+      },
+      error: (err: any) => {
+        this.errorMessage = err.error.message;
+        this.postData = err.error.data;
+      },
+    });
+  }
 }
