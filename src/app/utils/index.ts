@@ -89,4 +89,10 @@ export const getAuthToken = () => {
   const decryptedData = decrypt(getFromStorage('session'));
   return decryptedData?.accessToken;
 };
+
+export const getRefreshToken = () => {
+  const decryptedData = decrypt(getFromStorage('session'));
+  return decryptedData?.refreshToken;
+};
+
 /* tslint:enable */
