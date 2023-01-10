@@ -8,20 +8,40 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
 import { SinglePostComponent } from './pages/post-page/single-post/single-post.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
-  { path: 'posts', pathMatch: 'full', component: PostPageComponent },
+  {
+    path: 'posts',
+    pathMatch: 'full',
+    component: PostPageComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'posts/create-post',
     pathMatch: 'full',
     component: CreatePostComponent,
+    canActivate: [AuthGuard],
   },
-  { path: 'posts/search', pathMatch: 'full', component: SearchPageComponent },
-  { path: 'posts/:postId', component: SinglePostComponent },
-  { path: 'posts/edit-post/:postId', component: EditPostComponent },
+  {
+    path: 'posts/search',
+    pathMatch: 'full',
+    component: SearchPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'posts/:postId',
+    component: SinglePostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'posts/edit-post/:postId',
+    component: EditPostComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '**', redirectTo: '' },
 ];
 
