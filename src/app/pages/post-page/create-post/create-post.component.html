@@ -1,2 +1,57 @@
 <app-main-navbar></app-main-navbar>
-<h1>create-post works!</h1>
+<div>
+  <div class="col-sm-12 col-md-6 col-lg-5 container">
+    <form
+      class="form-container"
+      [formGroup]="createPostForm"
+      (ngSubmit)="createPost()"
+    >
+      <h3 class="mb-4">Add problem details</h3>
+      <div class="form-group mb-4">
+        <label class="form-label" for="problemTitle">Problem title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="problemTitle"
+          placeholder="Enter problem title"
+          formControlName="problemTitle"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label" for="problemDescription"
+          >Problem description</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="problemDescription"
+          placeholder="Enter problem description"
+          formControlName="problemDescription"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label" for="problemSolution">Problem solution</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="problemSolution"
+          placeholder="Enter problem solution"
+          formControlName="problemSolution"
+          required
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="col-12 mt-4 btn btn-dark btn-lg"
+        [disabled]="createPostForm.invalid"
+      >
+        Create
+      </button>
+    </form>
+  </div>
+</div>

@@ -10,4 +10,8 @@ export class PostService {
   getAllPosts() {
     return this.http.makeGetRequest('post');
   }
+
+  createPost(data: any) {
+    return this.http.makePostRequest('post', data);
+  }
 }
