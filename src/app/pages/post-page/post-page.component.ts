@@ -19,7 +19,7 @@ export class PostPageComponent implements OnInit {
   getAllPosts() {
     this.postService.getAllPosts().subscribe({
       next: (res: any) => {
-        this.postData = res.data;
+        this.postData = res.data.paginatedUserPosts;
       },
       error: (err: any) => {
         this.errorMessage = err.error.message;
