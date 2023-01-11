@@ -85,12 +85,12 @@ export const clearStorage = () => {
   return null;
 };
 
-export const getAuthToken = () => {
+export const getAuthTokenFromStorage = () => {
   const decryptedData = decrypt(getFromStorage('session'));
   return decryptedData?.accessToken;
 };
 
-export const getRefreshToken = () => {
+export const getRefreshTokenFromStorage = () => {
   const decryptedData = decrypt(getFromStorage('session'));
   return decryptedData?.refreshToken;
 };
