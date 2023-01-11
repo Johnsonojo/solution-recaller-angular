@@ -1,12 +1,12 @@
 <app-main-navbar></app-main-navbar>
 <div>
-  <div class="col-sm-12 col-md-6 col-lg-5 container">
+  <div class="col-sm-12 col-md-6 col-lg-6 container">
     <form
       class="form-container"
       [formGroup]="createPostForm"
       (ngSubmit)="createPost()"
     >
-      <h3 class="mb-4">Add problem details</h3>
+      <h3 class="mb-4 text-center">Add problem details</h3>
       <div class="form-group mb-4">
         <label class="form-label" for="problemTitle">Problem title</label>
         <input
@@ -35,14 +35,14 @@
 
       <div class="form-group mb-4">
         <label class="form-label" for="problemSolution">Problem solution</label>
-        <textarea
-          type="text"
-          class="form-control"
+        <quill-editor
           id="problemSolution"
-          placeholder="Enter problem solution"
           formControlName="problemSolution"
-          required
-        ></textarea>
+          class="form-control"
+          [placeholder]="placeholder"
+          [styles]="editorStyle"
+          [modules]=""
+        ></quill-editor>
       </div>
 
       <button

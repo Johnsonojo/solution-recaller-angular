@@ -10,6 +10,28 @@ import { PostService } from 'src/app/services/post/post.service';
   styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent implements OnInit {
+  placeholder = 'Write your solution here...';
+
+  editorStyle = {
+    height: '300px',
+    backgroundColor: '#ffffff',
+  };
+
+  editorModules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+      ['blockquote', 'code-block'],
+      [
+        { header: 1 },
+        { header: 2 },
+        { header: 3 },
+        { header: 4 },
+        { header: 5 },
+        { header: 6 },
+      ], // custom button values
+    ],
+  };
+
   createPostForm = this.fb.group({
     problemTitle: ['', [Validators.required, Validators.minLength(5)]],
     problemDescription: ['', [Validators.required, Validators.minLength(10)]],
