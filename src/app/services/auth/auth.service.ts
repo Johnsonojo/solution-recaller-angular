@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { getAuthToken } from 'src/app/utils';
+import {
+  getAuthTokenFromStorage,
+  getRefreshTokenFromStorage,
+} from 'src/app/utils';
 import { HttpService } from '../http/http.service';
 
 @Injectable({
@@ -20,8 +23,19 @@ export class AuthService {
     return this.http.makePostRequest('auth/logout', data);
   }
 
+  getNewRefreshToken() {
+    const data = {
+      refreshToken: getRefreshTokenFromStorage(),
+    };
+    return this.http.makePostRequest('auth/refresh-token', data);
+  }
+
   isLoggedIn() {
-    const token = getAuthToken();
+    const token = getAuthTokenFromStorage();
     return token ? true : false;
+  }
+
+  getAuthToken() {
+    return getAuthTokenFromStorage();
   }
 }

@@ -4,28 +4,58 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { getAuthToken } from 'src/app/utils';
+import { Injectable, Injector } from '@angular/core';
+import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import { encrypt, getRefreshTokenFromStorage } from 'src/app/utils';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor() {}
+  constructor(private inject: Injector) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = getAuthToken();
+    let authService = this.inject.get(AuthService);
+    let authReq = req;
 
-    if (token) {
-      const authReq = req.clone({
-        setHeaders: { Authorization: `Bearer ${token}` },
-      });
-      return next.handle(authReq);
-    } else {
-      return next.handle(req);
-    }
+    authReq = this.addTokenToHeader(req, authService.getAuthToken());
+
+    return next.handle(authReq).pipe(
+      catchError((err) => {
+        if (err.status === 403) {
+          // refresh token
+          return this.handleRefreshToken(req, next);
+        }
+        return throwError(() => err);
+      })
+    );
+  }
+
+  handleRefreshToken(req: HttpRequest<any>, next: HttpHandler) {
+    let authService = this.inject.get(AuthService);
+
+    return authService.getNewRefreshToken().pipe(
+      switchMap((res: any) => {
+        const { accessToken, refreshToken } = res.data;
+        const encryptedData = encrypt({ accessToken, refreshToken });
+        localStorage.setItem('session', encryptedData);
+        return next.handle(this.addTokenToHeader(req, accessToken));
+      }),
+      catchError((err) => {
+        authService.logout(getRefreshTokenFromStorage());
+        return throwError(() => err);
+      })
+    );
+  }
+
+  addTokenToHeader(request: HttpRequest<any>, token: string) {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }

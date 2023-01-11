@@ -63,7 +63,6 @@ export class LoginPageComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        console.log('err', err);
         this.toast.error(err.error.message);
       },
     });
