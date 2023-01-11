@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuillModule } from 'ngx-quill';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +52,7 @@ import { TokenInterceptorService } from './services/token/token-interceptor.serv
       progressAnimation: 'decreasing',
       progressBar: true,
     }),
+    QuillModule.forRoot(),
   ],
   providers: [
     {
