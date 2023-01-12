@@ -7,11 +7,15 @@ import { HttpService } from '../http/http.service';
 export class PostService {
   constructor(private http: HttpService) {}
 
+  createPost(data: any) {
+    return this.http.makePostRequest('post', data);
+  }
+
   getAllPosts() {
     return this.http.makeGetRequest('post');
   }
 
-  createPost(data: any) {
-    return this.http.makePostRequest('post', data);
+  getSinglePost(postId: string) {
+    return this.http.makeGetRequest(`post/${postId}`);
   }
 }
