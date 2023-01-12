@@ -1,5 +1,6 @@
 {
   "name": "solution-recaller-angular",
+  "description": "Solution Recaller Angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
