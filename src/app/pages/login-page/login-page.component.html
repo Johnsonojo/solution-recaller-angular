@@ -76,17 +76,21 @@
           </div>
         </div>
       </div>
-      <p class="d-flex justify-content-end">
+      <!-- <p class="d-flex justify-content-end">
         <a class="forgot-password-link" href="/forgot-password">
           Forgot Password?
         </a>
-      </p>
+      </p> -->
       <button
         type="submit"
         class="col-12 mt-2 btn btn-dark btn-lg"
         [disabled]="!loginForm.valid"
       >
-        Login
+        <div class="spinner-border" role="status" *ngIf="isLoading">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+
+        <span *ngIf="!isLoading">Login</span>
       </button>
       <br />
       <div class="mt-4">
