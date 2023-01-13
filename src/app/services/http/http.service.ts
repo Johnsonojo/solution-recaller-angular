@@ -20,4 +20,8 @@ export class HttpService {
   makePutRequest(endpoint: string, data: any) {
     return this.http.put(`${this.base_url}/${endpoint}`, data);
   }
+
+  makeDeleteRequest(endpoint: string) {
+    return this.http.delete(`${this.base_url}/${endpoint}`);
+  }
 }
