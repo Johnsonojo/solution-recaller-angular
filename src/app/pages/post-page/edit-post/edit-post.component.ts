@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PostService } from 'src/app/services/post/post.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
   selector: 'app-edit-post',
@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit-post.component.scss'],
 })
 export class EditPostComponent implements OnInit {
-  onePostDetails!: any;
   errorMessage!: string;
   isLoading = false;
   postId = this.route.snapshot.params['postId'];
@@ -21,9 +20,9 @@ export class EditPostComponent implements OnInit {
   };
 
   editPostForm = this.fb.group({
-    problemTitle: ['', [Validators.required, Validators.minLength(5)]],
-    problemDescription: ['', [Validators.required, Validators.minLength(10)]],
-    problemSolution: ['', [Validators.required, Validators.minLength(10)]],
+    problemTitle: '',
+    problemDescription: '',
+    problemSolution: '',
   });
 
   constructor(
@@ -36,12 +35,6 @@ export class EditPostComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.getSinglePost();
-    // set form values on init
-    this.editPostForm.patchValue({
-      problemTitle: this.onePostDetails?.problemTitle,
-      problemDescription: this.onePostDetails?.problemDescription,
-      problemSolution: this.onePostDetails?.problemSolution,
-    });
   }
 
   get formControls() {
@@ -53,7 +46,20 @@ export class EditPostComponent implements OnInit {
     this.postService.getSinglePost(this.postId).subscribe({
       next: (res: any) => {
         this.isLoading = false;
-        this.onePostDetails = res?.data;
+        this.editPostForm = this.fb.group({
+          problemTitle: [
+            res.data.problemTitle,
+            [Validators.required, Validators.minLength(5)],
+          ],
+          problemDescription: [
+            res.data.problemDescription,
+            [Validators.required, Validators.minLength(10)],
+          ],
+          problemSolution: [
+            res.data.problemSolution,
+            [Validators.required, Validators.minLength(10)],
+          ],
+        });
       },
       error: (err) => {
         this.isLoading = false;

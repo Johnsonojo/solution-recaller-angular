@@ -16,7 +16,7 @@
           class="form-control"
           id="problemTitle"
           formControlName="problemTitle"
-          value="{{ onePostDetails?.problemTitle }}"
+          name="problemTitle"
           required
         />
 
@@ -50,7 +50,7 @@
           class="form-control"
           id="problemDescription"
           formControlName="problemDescription"
-          value="{{ onePostDetails?.problemDescription }}"
+          name="problemDescription"
           required
         />
 
@@ -84,6 +84,7 @@
             id="problemSolution"
             class="form-control"
             formControlName="problemSolution"
+            name="problemSolution"
             [styles]="editorStyle"
           ></quill-editor>
         </div>
