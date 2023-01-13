@@ -11,6 +11,7 @@ import { PostService } from 'src/app/services/post/post.service';
 })
 export class CreatePostComponent implements OnInit {
   placeholder = 'Write your solution here...';
+  isLoading = false;
 
   editorStyle = {
     height: '300px',
@@ -33,9 +34,9 @@ export class CreatePostComponent implements OnInit {
   };
 
   createPostForm = this.fb.group({
-    problemTitle: ['', [Validators.required, Validators.minLength(5)]],
-    problemDescription: ['', [Validators.required, Validators.minLength(10)]],
-    problemSolution: ['', [Validators.required, Validators.minLength(10)]],
+    problemTitle: ['', [Validators.required, Validators.minLength(20)]],
+    problemDescription: ['', [Validators.required, Validators.minLength(20)]],
+    problemSolution: ['', [Validators.required, Validators.minLength(20)]],
   });
 
   constructor(
@@ -55,12 +56,15 @@ export class CreatePostComponent implements OnInit {
     if (this.createPostForm.invalid) {
       return;
     }
+    this.isLoading = true;
     this.postService.createPost(this.createPostForm.value).subscribe({
       next: (res: any) => {
+        this.isLoading = false;
         this.toast.success(res.message);
         this.router.navigate(['/posts']);
       },
       error: (err) => {
+        this.isLoading = false;
         this.toast.error(err.error.message);
       },
     });

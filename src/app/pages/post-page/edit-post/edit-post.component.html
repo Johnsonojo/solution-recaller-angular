@@ -1,2 +1,127 @@
 <app-main-navbar></app-main-navbar>
-<h1>edit-post works!</h1>
+
+<div>
+  <div class="col-sm-12 col-md-6 col-lg-5 container">
+    <form
+      class="form-container"
+      [formGroup]="editPostForm"
+      (ngSubmit)="updatePost()"
+    >
+      <h3 class="mb-4">Edit problem details</h3>
+
+      <div class="form-group mb-4">
+        <label class="form-label">Problem title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="problemTitle"
+          formControlName="problemTitle"
+          name="problemTitle"
+          required
+        />
+
+        <div
+          *ngIf="
+            formControls.problemTitle.invalid &&
+            (formControls.problemTitle.dirty ||
+              formControls.problemTitle.touched)
+          "
+        >
+          <div
+            *ngIf="formControls.problemTitle.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Problem title is required
+          </div>
+          <div
+            *ngIf="formControls.problemTitle.errors?.['minlength']"
+            class="alert alert-danger"
+          >
+            Problem title must be at least 20 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label">Problem description</label>
+
+        <input
+          type="text"
+          class="form-control"
+          id="problemDescription"
+          formControlName="problemDescription"
+          name="problemDescription"
+          required
+        />
+
+        <div
+          *ngIf="
+            formControls.problemDescription.invalid &&
+            (formControls.problemDescription.dirty ||
+              formControls.problemDescription.touched)
+          "
+        >
+          <div
+            *ngIf="formControls.problemDescription.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Problem description is required
+          </div>
+          <div
+            *ngIf="formControls.problemDescription.errors?.['minlength']"
+            class="alert alert-danger"
+          >
+            Problem description must be at least 20 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label">Problem solution</label>
+
+        <div class="editor-wrapper">
+          <quill-editor
+            id="problemSolution"
+            class="form-control"
+            formControlName="problemSolution"
+            name="problemSolution"
+            [styles]="editorStyle"
+          ></quill-editor>
+        </div>
+
+        <div
+          *ngIf="
+            formControls.problemSolution.invalid &&
+            (formControls.problemSolution.dirty ||
+              formControls.problemSolution.touched)
+          "
+        >
+          <div
+            *ngIf="formControls.problemSolution.errors?.['required']"
+            class="alert alert-danger"
+          >
+            Problem solution is required
+          </div>
+          <div
+            *ngIf="formControls.problemSolution.errors?.['minlength']"
+            class="alert alert-danger"
+          >
+            Problem solution must be at least 20 characters long.
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="col-12 mt-4 btn btn-dark btn-lg"
+        [disabled]="editPostForm.invalid"
+      >
+        <div class="spinner-border" role="status" *ngIf="isLoading">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+
+        <span *ngIf="!isLoading">Update </span>
+      </button>
+    </form>
+  </div>
+</div>

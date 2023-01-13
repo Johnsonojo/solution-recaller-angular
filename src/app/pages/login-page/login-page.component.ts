@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
       ],
     ],
   });
-  loading = false;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -49,10 +49,10 @@ export class LoginPageComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.loading = true;
+    this.isLoading = true;
     this.authService.login(this.loginForm.value).subscribe({
       next: (res: any) => {
-        this.loading = false;
+        this.isLoading = false;
         const { id, firstName, accessToken, refreshToken } = res.data;
         const encryptedData = encrypt({ accessToken, refreshToken });
         localStorage.setItem('session', encryptedData);
@@ -62,7 +62,7 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['/posts']);
       },
       error: (err) => {
-        this.loading = false;
+        this.isLoading = false;
         this.toast.error(err.error.message);
       },
     });

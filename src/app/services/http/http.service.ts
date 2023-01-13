@@ -16,4 +16,8 @@ export class HttpService {
   makePostRequest(endpoint: string, data: any) {
     return this.http.post(`${this.base_url}/${endpoint}`, data);
   }
+
+  makePutRequest(endpoint: string, data: any) {
+    return this.http.put(`${this.base_url}/${endpoint}`, data);
+  }
 }

@@ -18,4 +18,8 @@ export class PostService {
   getSinglePost(postId: string) {
     return this.http.makeGetRequest(`post/${postId}`);
   }
+
+  updatePost(postId: string, data: any) {
+    return this.http.makePutRequest(`post/${postId}`, data);
+  }
 }
