@@ -1,2 +1,55 @@
 <app-main-navbar></app-main-navbar>
-<h1>edit-post works!</h1>
+
+<div>
+  <div class="col-sm-12 col-md-6 col-lg-5 container">
+    <form
+      class="form-container"
+      [formGroup]="editPostForm"
+      (ngSubmit)="updatePost()"
+    >
+      <h3 class="mb-4">Edit problem details</h3>
+
+      <div class="form-group mb-4">
+        <label class="form-label">Problem title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="problemTitle"
+          formControlName="problemTitle"
+          value="{{ onePostDetails?.problemTitle }}"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label">Problem description</label>
+
+        <input
+          type="text"
+          class="form-control"
+          id="problemDescription"
+          formControlName="problemDescription"
+          value="{{ onePostDetails?.problemDescription }}"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label">Problem solution</label>
+
+        <div class="editor-wrapper">
+          <quill-editor
+            id="problemSolution"
+            class="form-control"
+            formControlName="problemSolution"
+            [styles]="editorStyle"
+          ></quill-editor>
+        </div>
+      </div>
+
+      <button type="submit" class="col-12 mt-4 btn btn-dark btn-lg">
+        Update
+      </button>
+    </form>
+  </div>
+</div>
