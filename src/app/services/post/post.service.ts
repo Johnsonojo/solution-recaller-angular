@@ -22,4 +22,8 @@ export class PostService {
   updatePost(postId: string, data: any) {
     return this.http.makePutRequest(`post/${postId}`, data);
   }
+
+  deletePost(postId: string) {
+    return this.http.makeDeleteRequest(`post/${postId}`);
+  }
 }

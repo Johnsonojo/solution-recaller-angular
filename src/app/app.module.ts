@@ -16,6 +16,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { CreatePostComponent } from './pages/post-page/create-post/create-post.component';
+import { DeleteModalComponent } from './pages/post-page/delete-modal/delete-modal.component';
 import { EditPostComponent } from './pages/post-page/edit-post/edit-post.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
 import { SinglePostComponent } from './pages/post-page/single-post/single-post.component';
@@ -38,6 +39,7 @@ import { TokenInterceptorService } from './services/token/token-interceptor.serv
     LandingNavbarComponent,
     MainNavbarComponent,
     PostCardComponent,
+    DeleteModalComponent,
   ],
   imports: [
     BrowserModule,
