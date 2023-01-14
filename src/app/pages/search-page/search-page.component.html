@@ -1,2 +1,53 @@
 <app-main-navbar></app-main-navbar>
-<h1>search-page works!</h1>
+
+<div class="container">
+  <h3 class="mt-4 mb-4">Recall a solution</h3>
+
+  <!-- Search Form -->
+  <div class="container col-sm-12 col-md-6">
+    <form [formGroup]="searchForm" (ngSubmit)="searchPost()">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="searchKeyword"
+          aria-describedby="search-button"
+          placeholder="Enter keyword"
+          formControlName="searchKeyword"
+          required
+        />
+        <button
+          class="btn btn-dark col-sm-3"
+          type="submit"
+          id="search-button"
+          [disabled]="searchForm.invalid"
+        >
+          <div class="spinner-border" role="status" *ngIf="isLoading">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <span *ngIf="!isLoading">Recall</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Search Result -->
+  <div class="container">
+    <div class="row mt-5" *ngIf="errorMessage; else showResult">
+      <div class="text-center">
+        <h4>{{ errorMessage }}</h4>
+      </div>
+    </div>
+
+    <ng-template #showResult>
+      <div class="row g-6 mt-5">
+        <div
+          class="col-sm-12 col-md-6 col-lg-4 mb-4"
+          *ngFor="let item of searchResult"
+        >
+          <app-post-card [post]="item"></app-post-card>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
