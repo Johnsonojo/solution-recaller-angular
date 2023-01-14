@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class SinglePostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -34,6 +35,12 @@ export class SinglePostComponent implements OnInit {
         this.isLoading = false;
         this.errorMessage = err.error.message;
       },
+    });
+  }
+
+  OpenEditPage(postId: any) {
+    this.router.navigate(['posts/create-post'], {
+      queryParams: { type: 'edit', postId },
     });
   }
 }
