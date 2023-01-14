@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {
-  getAuthTokenFromStorage,
-  getRefreshTokenFromStorage,
-} from 'src/app/utils';
+import { getTokensFromStorage } from 'src/app/utils';
 import { HttpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  tokens = getTokensFromStorage();
+
   constructor(private http: HttpService) {}
 
   signup(data: any) {
@@ -24,18 +23,15 @@ export class AuthService {
   }
 
   getNewRefreshToken() {
-    const data = {
-      refreshToken: getRefreshTokenFromStorage(),
-    };
+    const data = { refreshToken: this.tokens.refreshToken };
     return this.http.makePostRequest('auth/refresh-token', data);
   }
 
   isLoggedIn() {
-    const token = getAuthTokenFromStorage();
-    return token ? true : false;
+    return this.tokens.accessToken ? true : false;
   }
 
   getAuthToken() {
-    return getAuthTokenFromStorage();
+    return this.tokens.accessToken;
   }
 }

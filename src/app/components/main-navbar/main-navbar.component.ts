@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { clearStorage, getRefreshTokenFromStorage } from 'src/app/utils';
+import { clearStorage, getTokensFromStorage } from 'src/app/utils';
 
 @Component({
   selector: 'app-main-navbar',
@@ -14,7 +14,7 @@ export class MainNavbarComponent implements OnInit {
   ngOnInit(): void {}
 
   onLogout() {
-    const refreshToken = getRefreshTokenFromStorage();
+    const { refreshToken } = getTokensFromStorage();
     this.authService.logout({ refreshToken }).subscribe({
       next: (res: any) => {
         clearStorage();

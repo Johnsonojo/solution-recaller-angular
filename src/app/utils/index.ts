@@ -85,14 +85,12 @@ export const clearStorage = () => {
   return null;
 };
 
-export const getAuthTokenFromStorage = () => {
+export const getTokensFromStorage = () => {
   const decryptedData = decrypt(getFromStorage('session'));
-  return decryptedData?.accessToken;
-};
-
-export const getRefreshTokenFromStorage = () => {
-  const decryptedData = decrypt(getFromStorage('session'));
-  return decryptedData?.refreshToken;
+  return {
+    accessToken: decryptedData?.accessToken,
+    refreshToken: decryptedData?.refreshToken,
+  };
 };
 
 /* tslint:enable */
