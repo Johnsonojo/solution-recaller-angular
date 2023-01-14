@@ -21,6 +21,20 @@ export class CreatePostComponent implements OnInit {
     backgroundColor: '#ffffff',
   };
 
+  editorModules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block', 'link'],
+      [{ header: 1 }, { header: 2 }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ indent: '-1' }, { indent: '+1' }],
+      [{ color: [] }, { background: [] }],
+      [{ align: ['center', 'right', 'justify'] }],
+      ['clean'],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ],
+  };
+
   postForm = this.fb.group({
     problemTitle: ['', [Validators.required, Validators.minLength(20)]],
     problemDescription: ['', [Validators.required, Validators.minLength(20)]],
