@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from 'src/app/services/post/post.service';
 
@@ -12,28 +12,16 @@ import { PostService } from 'src/app/services/post/post.service';
 export class CreatePostComponent implements OnInit {
   placeholder = 'Write your solution here...';
   isLoading = false;
+  isUpdate = false;
+  postId: any;
+  errorMessage!: string;
 
   editorStyle = {
     height: '300px',
     backgroundColor: '#ffffff',
   };
 
-  editorModules = {
-    toolbar: [
-      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-      ['blockquote', 'code-block'],
-      [
-        { header: 1 },
-        { header: 2 },
-        { header: 3 },
-        { header: 4 },
-        { header: 5 },
-        { header: 6 },
-      ], // custom button values
-    ],
-  };
-
-  createPostForm = this.fb.group({
+  postForm = this.fb.group({
     problemTitle: ['', [Validators.required, Validators.minLength(20)]],
     problemDescription: ['', [Validators.required, Validators.minLength(20)]],
     problemSolution: ['', [Validators.required, Validators.minLength(20)]],
@@ -42,22 +30,64 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
+    private router: Router,
     private toast: ToastrService,
-    private router: Router
+    private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.queryParamMap.subscribe((param) => {
+      let type = param.get('type');
+      if (type === 'edit') {
+        this.postId = param.get('postId');
+        this.isUpdate = true;
+
+        this.getSinglePost();
+      } else {
+        this.isLoading = false;
+        this.isUpdate = false;
+      }
+    });
+  }
 
   get formControls() {
-    return this.createPostForm.controls;
+    return this.postForm.controls;
+  }
+
+  getSinglePost() {
+    this.isLoading = true;
+
+    this.postService.getSinglePost(this.postId).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        this.postForm = this.fb.group({
+          problemTitle: [
+            res.data.problemTitle,
+            [Validators.required, Validators.minLength(5)],
+          ],
+          problemDescription: [
+            res.data.problemDescription,
+            [Validators.required, Validators.minLength(10)],
+          ],
+          problemSolution: [
+            res.data.problemSolution,
+            [Validators.required, Validators.minLength(10)],
+          ],
+        });
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = err.error.message;
+      },
+    });
   }
 
   createPost() {
-    if (this.createPostForm.invalid) {
+    if (this.postForm.invalid) {
       return;
     }
     this.isLoading = true;
-    this.postService.createPost(this.createPostForm.value).subscribe({
+    this.postService.createPost(this.postForm.value).subscribe({
       next: (res: any) => {
         this.isLoading = false;
         this.toast.success(res.message);
@@ -68,5 +98,28 @@ export class CreatePostComponent implements OnInit {
         this.toast.error(err.error.message);
       },
     });
+  }
+
+  updatePost() {
+    this.isLoading = true;
+    this.postService.updatePost(this.postId, this.postForm.value).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        this.toast.success(res.message);
+        this.router.navigate([`/posts/${this.postId}`]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.toast.error(err.error.message);
+      },
+    });
+  }
+
+  onSubmitPost() {
+    if (this.isUpdate) {
+      this.updatePost();
+    } else {
+      this.createPost();
+    }
   }
 }

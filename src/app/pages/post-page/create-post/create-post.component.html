@@ -3,10 +3,11 @@
   <div class="col-sm-12 col-md-6 col-lg-6 container">
     <form
       class="form-container"
-      [formGroup]="createPostForm"
-      (ngSubmit)="createPost()"
+      [formGroup]="postForm"
+      (ngSubmit)="onSubmitPost()"
     >
-      <h3 class="mb-4 text-center">Add problem details</h3>
+      <h3 class="mb-4 text-center" *ngIf="!isUpdate">Add problem details</h3>
+      <h3 class="mb-4 text-center" *ngIf="isUpdate">Edit problem details</h3>
       <div class="form-group mb-4">
         <label class="form-label" for="problemTitle">Problem title</label>
         <input
@@ -83,7 +84,6 @@
           class="form-control"
           [placeholder]="placeholder"
           [styles]="editorStyle"
-          [modules]=""
         ></quill-editor>
 
         <div
@@ -111,13 +111,14 @@
       <button
         type="submit"
         class="col-12 mt-4 btn btn-dark btn-lg"
-        [disabled]="createPostForm.invalid"
+        [disabled]="postForm.invalid"
       >
         <div class="spinner-border" role="status" *ngIf="isLoading">
           <span class="visually-hidden">Loading...</span>
         </div>
 
-        <span *ngIf="!isLoading">Create </span>
+        <span *ngIf="!isLoading && !isUpdate">Create </span>
+        <span *ngIf="!isLoading && isUpdate">Update</span>
       </button>
     </form>
   </div>

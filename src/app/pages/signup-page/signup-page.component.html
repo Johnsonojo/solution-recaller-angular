@@ -18,6 +18,7 @@
           required
         />
         <div
+          class="mt-2"
           *ngIf="
             formControls.firstName.invalid &&
             (formControls.firstName.dirty || formControls.firstName.touched)
@@ -50,6 +51,7 @@
           required
         />
         <div
+          class="mt-2"
           *ngIf="
             formControls.email.invalid &&
             (formControls.email.dirty || formControls.email.touched)
@@ -82,6 +84,7 @@
         />
 
         <div
+          class="mt-2"
           *ngIf="
             formControls.password.invalid &&
             (formControls.password.dirty || formControls.password.touched)
@@ -114,7 +117,7 @@
       >
         Register
       </button>
-      <div class="mt-4">
+      <div class="mt-5 d-flex justify-content-center">
         <p>
           Already have an account yet?
           <a class="login-link" href="/login"> Login </a>

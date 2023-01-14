@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post/post.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class PostPageComponent implements OnInit {
   postData!: any[];
   errorMessage!: string;
 
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllPosts();
@@ -25,6 +26,12 @@ export class PostPageComponent implements OnInit {
         this.errorMessage = err.error.message;
         this.postData = err.error.data;
       },
+    });
+  }
+
+  openCreatePage() {
+    this.router.navigate(['posts/create-post'], {
+      queryParams: { type: 'create' },
     });
   }
 }
