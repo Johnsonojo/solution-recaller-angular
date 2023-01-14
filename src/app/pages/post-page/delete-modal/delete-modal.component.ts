@@ -24,7 +24,6 @@ export class DeleteModalComponent implements OnInit {
   onDeletePost() {
     this.postService.deletePost(this.postId).subscribe({
       next: (res: any) => {
-        console.log(res);
         window.location.href = '/posts';
         // close modal
         this.el.nativeElement.querySelector('#deleteModal').modal('hide');
@@ -32,7 +31,7 @@ export class DeleteModalComponent implements OnInit {
         this.router.navigate(['/posts']);
       },
       error: (err) => {
-        console.log(err);
+        this.toast.error(err.error.message);
       },
     });
   }

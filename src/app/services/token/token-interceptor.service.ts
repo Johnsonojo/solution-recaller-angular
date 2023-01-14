@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
-import { encrypt, getRefreshTokenFromStorage } from 'src/app/utils';
+import { encrypt } from 'src/app/utils';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -21,7 +21,9 @@ export class TokenInterceptorService implements HttpInterceptor {
     let authService = this.inject.get(AuthService);
     let authReq = req;
 
-    authReq = this.addTokenToHeader(req, authService.getAuthToken());
+    const { accessToken } = authService.tokens;
+
+    authReq = this.addTokenToHeader(req, accessToken);
 
     return next.handle(authReq).pipe(
       catchError((err) => {
@@ -45,7 +47,7 @@ export class TokenInterceptorService implements HttpInterceptor {
         return next.handle(this.addTokenToHeader(req, accessToken));
       }),
       catchError((err) => {
-        authService.logout(getRefreshTokenFromStorage());
+        authService.logout(authService.tokens.refreshToken);
         return throwError(() => err);
       })
     );

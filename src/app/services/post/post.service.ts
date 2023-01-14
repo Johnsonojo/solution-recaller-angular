@@ -26,4 +26,9 @@ export class PostService {
   deletePost(postId: string) {
     return this.http.makeDeleteRequest(`post/${postId}`);
   }
+
+  searchPost(data: any) {
+    const { searchKeyword } = data;
+    return this.http.makeGetRequest(`search/keyword/${searchKeyword}`);
+  }
 }
