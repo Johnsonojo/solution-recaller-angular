@@ -6,8 +6,8 @@
       [formGroup]="postForm"
       (ngSubmit)="onSubmitPost()"
     >
-      <h3 class="mb-4 text-center" *ngIf="!isUpdate">Add problem details</h3>
-      <h3 class="mb-4 text-center" *ngIf="isUpdate">Edit problem details</h3>
+      <h3 class="mb-3 text-center" *ngIf="!isUpdate">Add details</h3>
+      <h3 class="mb-3 text-center" *ngIf="isUpdate">Edit details</h3>
       <div class="form-group mb-4">
         <label class="form-label" for="problemTitle">Problem title</label>
         <input
@@ -28,13 +28,13 @@
         >
           <div
             *ngIf="formControls.problemTitle.errors?.['required']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Problem title is required
           </div>
           <div
             *ngIf="formControls.problemTitle.errors?.['minlength']"
-            class="alert alert-danger"
+            class="alert alert-danger p-2 mt-2"
           >
             Problem title must be at least 20 characters long.
           </div>
@@ -63,13 +63,13 @@
         >
           <div
             *ngIf="formControls.problemDescription.errors?.['required']"
-            class="alert alert-danger"
+            class="alert alert-danger p-2 mt-2"
           >
             Problem description is required
           </div>
           <div
             *ngIf="formControls.problemDescription.errors?.['minlength']"
-            class="alert alert-danger"
+            class="alert alert-danger p-2 mt-2"
           >
             Problem description must be at least 20 characters long.
           </div>
@@ -81,7 +81,7 @@
         <quill-editor
           id="problemSolution"
           formControlName="problemSolution"
-          class="form-control"
+          class="form-control px-2 py-2 main-editor"
           [placeholder]="placeholder"
           [styles]="editorStyle"
           [modules]="editorModules"
@@ -96,13 +96,13 @@
         >
           <div
             *ngIf="formControls.problemSolution.errors?.['required']"
-            class="alert alert-danger"
+            class="alert alert-danger p-2 mt-2"
           >
             Problem solution is required
           </div>
           <div
             *ngIf="formControls.problemSolution.errors?.['minlength']"
-            class="alert alert-danger"
+            class="alert alert-danger p-2 mt-2"
           >
             Problem solution must be at least 20 characters long.
           </div>
@@ -111,7 +111,7 @@
 
       <button
         type="submit"
-        class="col-12 mt-4 btn btn-dark btn-lg"
+        class="col-12 mt-2 btn btn-dark btn-lg"
         [disabled]="postForm.invalid"
       >
         <div class="spinner-border" role="status" *ngIf="isLoading">

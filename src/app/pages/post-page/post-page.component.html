@@ -1,8 +1,8 @@
 <app-main-navbar></app-main-navbar>
 
 <div>
-  <div class="container top-content">
-    <h1>All Posts</h1>
+  <div class="container top-content mt-5">
+    <h2>All Posts</h2>
     <a
       class="btn btn-dark"
       routerLink="/posts/create-post"
@@ -15,17 +15,30 @@
 
   <div class="container">
     <div class="row" *ngIf="postData?.length === 0">
-      <div className="text-center">
+      <div class="text-center">
         <h3>{{ errorMessage }}</h3>
       </div>
     </div>
-    <div class="row">
-      <div
-        class="col-sm-12 col-md-6 col-lg-4 mb-4"
-        *ngFor="let item of postData"
-      >
-        <app-post-card [post]="item"></app-post-card>
+    <div class="row" *ngIf="isLoading; else showData">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <app-placeholder-card></app-placeholder-card>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <app-placeholder-card></app-placeholder-card>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <app-placeholder-card></app-placeholder-card>
       </div>
     </div>
+    <ng-template #showData>
+      <div class="row">
+        <div
+          class="col-sm-12 col-md-6 col-lg-4 mb-4"
+          *ngFor="let item of postData"
+        >
+          <app-post-card *ngIf="!isLoading" [post]="item"></app-post-card>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>
