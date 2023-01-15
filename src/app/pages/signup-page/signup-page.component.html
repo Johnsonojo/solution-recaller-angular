@@ -17,6 +17,7 @@
           formControlName="firstName"
           required
         />
+
         <div
           class="mt-2"
           *ngIf="
@@ -26,13 +27,13 @@
         >
           <div
             *ngIf="formControls.firstName.errors?.['required']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             First name is required
           </div>
           <div
             *ngIf="formControls.firstName.errors?.['minlength']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Name must be at least 2 characters long.
           </div>
@@ -59,13 +60,13 @@
         >
           <div
             *ngIf="formControls.email.errors?.['required']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Email is required
           </div>
           <div
             *ngIf="formControls.email.errors?.['pattern']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Email is invalid
           </div>
@@ -74,14 +75,27 @@
 
       <div class="form-group mb-3">
         <label class="mb-2" for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Enter password"
-          formControlName="password"
-          required
-        />
+        <div class="input-group mb-1">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control"
+            id="password"
+            placeholder="Enter password"
+            formControlName="password"
+            required
+          />
+          <span class="input-group-text">
+            <i
+              style="cursor: pointer"
+              class="bi bi-eye-slash"
+              (click)="showPassword = !showPassword"
+              [ngClass]="{
+                'bi-eye': showPassword,
+                'bi-eye-slash': !showPassword
+              }"
+            ></i>
+          </span>
+        </div>
 
         <div
           class="mt-2"
@@ -92,19 +106,19 @@
         >
           <div
             *ngIf="formControls.password.errors?.['required']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Password is required
           </div>
           <div
             *ngIf="formControls.password.errors?.['minlength']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Password must be at least 8 characters long.
           </div>
           <div
             *ngIf="formControls.password.errors?.['pattern']"
-            class="alert alert-danger"
+            class="alert alert-danger py-2 mt-2"
           >
             Password should be a combination of letters and numbers.
           </div>
