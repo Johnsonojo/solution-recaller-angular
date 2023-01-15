@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingNavbarComponent } from './components/landing-navbar/landing-navbar.component';
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
+import { PlaceholderCardComponent } from './components/placeholder-card/placeholder-card.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -38,6 +39,7 @@ import { TokenInterceptorService } from './services/token/token-interceptor.serv
     MainNavbarComponent,
     PostCardComponent,
     DeleteModalComponent,
+    PlaceholderCardComponent,
   ],
   imports: [
     BrowserModule,
