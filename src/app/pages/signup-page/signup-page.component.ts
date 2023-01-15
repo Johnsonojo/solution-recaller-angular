@@ -30,6 +30,7 @@ export class SignupPageComponent implements OnInit {
     ],
   });
   loading = false;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -42,6 +43,10 @@ export class SignupPageComponent implements OnInit {
 
   get formControls() {
     return this.signupForm.controls;
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
   signupUser() {

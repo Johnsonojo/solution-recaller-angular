@@ -10,6 +10,7 @@ import { PostService } from 'src/app/services/post/post.service';
 export class PostPageComponent implements OnInit {
   postData!: any[];
   errorMessage!: string;
+  isLoading = false;
 
   constructor(private postService: PostService, private router: Router) {}
 
@@ -18,11 +19,14 @@ export class PostPageComponent implements OnInit {
   }
 
   getAllPosts() {
+    this.isLoading = true;
     this.postService.getAllPosts().subscribe({
       next: (res: any) => {
+        this.isLoading = false;
         this.postData = res.data.paginatedUserPosts;
       },
       error: (err: any) => {
+        this.isLoading = false;
         this.errorMessage = err.error.message;
         this.postData = err.error.data;
       },
