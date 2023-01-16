@@ -1,23 +1,15 @@
 .container-fluid {
-  background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
   height: 100vh;
+  background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
 
-  .container {
-    height: 100vh;
+  .signup-link {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
 
-    .row {
-      height: 100%;
-    }
-
-    .signup-link {
-      text-decoration: none;
-      color: #000000;
-      font-weight: bold;
-      cursor: pointer;
-
-      &:hover {
-        color: #1e1e1e;
-      }
+    &:hover {
+      color: #1e1e1e;
     }
   }
 }
