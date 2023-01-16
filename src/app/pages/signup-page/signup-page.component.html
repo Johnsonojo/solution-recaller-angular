@@ -1,142 +1,147 @@
-<app-landing-navbar></app-landing-navbar>
-<div>
-  <div class="col-sm-12 col-md-6 col-lg-4 container">
-    <form
-      class="form-container"
-      [formGroup]="signupForm"
-      (ngSubmit)="signupUser()"
-    >
-      <h3 class="mb-4 text-center">Register</h3>
-      <div class="form-group mb-4">
-        <label class="mb-2" for="firstName">First name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="firstName"
-          placeholder="Enter first name"
-          formControlName="firstName"
-          required
-        />
+<!-- <app-landing-navbar></app-landing-navbar> -->
 
-        <div
-          class="mt-2"
-          *ngIf="
-            formControls.firstName.invalid &&
-            (formControls.firstName.dirty || formControls.firstName.touched)
-          "
+<div class="container-fluid">
+  <div class="container">
+    <div class="row d-flex align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-7">
+        <form
+          class="form-container"
+          [formGroup]="signupForm"
+          (ngSubmit)="signupUser()"
         >
-          <div
-            *ngIf="formControls.firstName.errors?.['required']"
-            class="alert alert-danger py-2 mt-2"
-          >
-            First name is required
-          </div>
-          <div
-            *ngIf="formControls.firstName.errors?.['minlength']"
-            class="alert alert-danger py-2 mt-2"
-          >
-            Name must be at least 2 characters long.
-          </div>
-        </div>
-      </div>
+          <h3 class="mb-4 text-center">Register</h3>
+          <div class="form-group mb-4">
+            <label class="mb-2" for="firstName">First name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              placeholder="Enter first name"
+              formControlName="firstName"
+              required
+            />
 
-      <div class="form-group mb-4">
-        <label class="mb-2" for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          formControlName="email"
-          required
-        />
-        <div
-          class="mt-2"
-          *ngIf="
-            formControls.email.invalid &&
-            (formControls.email.dirty || formControls.email.touched)
-          "
-        >
-          <div
-            *ngIf="formControls.email.errors?.['required']"
-            class="alert alert-danger py-2 mt-2"
-          >
-            Email is required
+            <div
+              class="mt-2"
+              *ngIf="
+                formControls.firstName.invalid &&
+                (formControls.firstName.dirty || formControls.firstName.touched)
+              "
+            >
+              <div
+                *ngIf="formControls.firstName.errors?.['required']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                First name is required
+              </div>
+              <div
+                *ngIf="formControls.firstName.errors?.['minlength']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                Name must be at least 2 characters long.
+              </div>
+            </div>
           </div>
-          <div
-            *ngIf="formControls.email.errors?.['pattern']"
-            class="alert alert-danger py-2 mt-2"
-          >
-            Email is invalid
-          </div>
-        </div>
-      </div>
 
-      <div class="form-group mb-3">
-        <label class="mb-2" for="password">Password</label>
-        <div class="input-group mb-1">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            class="form-control"
-            id="password"
-            placeholder="Enter password"
-            formControlName="password"
-            required
-          />
-          <span class="input-group-text">
-            <i
-              style="cursor: pointer"
-              class="bi bi-eye-slash"
-              (click)="showPassword = !showPassword"
-              [ngClass]="{
-                'bi-eye': showPassword,
-                'bi-eye-slash': !showPassword
-              }"
-            ></i>
-          </span>
-        </div>
+          <div class="form-group mb-4">
+            <label class="mb-2" for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              formControlName="email"
+              required
+            />
+            <div
+              class="mt-2"
+              *ngIf="
+                formControls.email.invalid &&
+                (formControls.email.dirty || formControls.email.touched)
+              "
+            >
+              <div
+                *ngIf="formControls.email.errors?.['required']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                Email is required
+              </div>
+              <div
+                *ngIf="formControls.email.errors?.['pattern']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                Email is invalid
+              </div>
+            </div>
+          </div>
 
-        <div
-          class="mt-2"
-          *ngIf="
-            formControls.password.invalid &&
-            (formControls.password.dirty || formControls.password.touched)
-          "
-        >
-          <div
-            *ngIf="formControls.password.errors?.['required']"
-            class="alert alert-danger py-2 mt-2"
-          >
-            Password is required
+          <div class="form-group mb-3">
+            <label class="mb-2" for="password">Password</label>
+            <div class="input-group mb-1">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                id="password"
+                placeholder="Enter password"
+                formControlName="password"
+                required
+              />
+              <span class="input-group-text">
+                <i
+                  style="cursor: pointer"
+                  class="bi bi-eye-slash"
+                  (click)="showPassword = !showPassword"
+                  [ngClass]="{
+                    'bi-eye': showPassword,
+                    'bi-eye-slash': !showPassword
+                  }"
+                ></i>
+              </span>
+            </div>
+
+            <div
+              class="mt-2"
+              *ngIf="
+                formControls.password.invalid &&
+                (formControls.password.dirty || formControls.password.touched)
+              "
+            >
+              <div
+                *ngIf="formControls.password.errors?.['required']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                Password is required
+              </div>
+              <div
+                *ngIf="formControls.password.errors?.['minlength']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                Password must be at least 8 characters long.
+              </div>
+              <div
+                *ngIf="formControls.password.errors?.['pattern']"
+                class="alert alert-danger py-2 mt-2"
+              >
+                Password should be a combination of letters and numbers.
+              </div>
+            </div>
           </div>
-          <div
-            *ngIf="formControls.password.errors?.['minlength']"
-            class="alert alert-danger py-2 mt-2"
+          <button
+            type="submit"
+            class="col-12 mt-4 btn btn-dark btn-lg"
+            [disabled]="!signupForm.valid"
           >
-            Password must be at least 8 characters long.
+            Register
+          </button>
+          <div class="mt-5 d-flex justify-content-center">
+            <p>
+              Already have an account yet?
+              <a class="login-link" href="/login"> Login </a>
+            </p>
           </div>
-          <div
-            *ngIf="formControls.password.errors?.['pattern']"
-            class="alert alert-danger py-2 mt-2"
-          >
-            Password should be a combination of letters and numbers.
-          </div>
-        </div>
+        </form>
       </div>
-      <button
-        type="submit"
-        class="col-12 mt-4 btn btn-dark btn-lg"
-        [disabled]="!signupForm.valid"
-      >
-        Register
-      </button>
-      <div class="mt-5 d-flex justify-content-center">
-        <p>
-          Already have an account yet?
-          <a class="login-link" href="/login"> Login </a>
-        </p>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
