@@ -2,8 +2,24 @@
   background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
   height: 100vh;
 
+  button {
+    background-color: #6d72c3 !important;
+    border: none !important;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      background-color: #5e61a5 !important;
+      box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+  }
+
   .login-link {
-    text-decoration: none !important;
+    text-decoration: none;
     color: #000000;
     font-weight: bold;
 
