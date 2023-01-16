@@ -2,21 +2,13 @@
   background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
   height: 100vh;
 
-  .container {
-    height: 100vh;
+  .login-link {
+    text-decoration: none !important;
+    color: #000000;
+    font-weight: bold;
 
-    .row {
-      height: 100%;
-    }
-
-    .login-link {
-      text-decoration: none !important;
-      color: #000000;
-      font-weight: bold;
-
-      &:hover {
-        color: #1e1e1e;
-      }
+    &:hover {
+      color: #1e1e1e;
     }
   }
 }
