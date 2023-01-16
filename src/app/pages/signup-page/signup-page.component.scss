@@ -1,9 +1,22 @@
-.login-link {
-  text-decoration: none !important;
-  color: #000000;
-  font-weight: bold;
+.container-fluid {
+  background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
+  height: 100vh;
 
-  &:hover {
-    color: #1e1e1e;
+  .container {
+    height: 100vh;
+
+    .row {
+      height: 100%;
+    }
+
+    .login-link {
+      text-decoration: none !important;
+      color: #000000;
+      font-weight: bold;
+
+      &:hover {
+        color: #1e1e1e;
+      }
+    }
   }
 }
