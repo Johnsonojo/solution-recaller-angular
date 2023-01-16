@@ -1,21 +1,23 @@
-.forgot-password-link {
-  margin-top: 20px;
-  text-decoration: none !important;
-  color: #000000;
-  font-weight: bold;
+.container-fluid {
+  background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
+  height: 100vh;
 
-  &:hover {
-    color: #1e1e1e;
-  }
-}
+  .container {
+    height: 100vh;
 
-.signup-link {
-  text-decoration: none;
-  color: #000000;
-  font-weight: bold;
-  cursor: pointer;
+    .row {
+      height: 100%;
+    }
 
-  &:hover {
-    color: #1e1e1e;
+    .signup-link {
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        color: #1e1e1e;
+      }
+    }
   }
 }
