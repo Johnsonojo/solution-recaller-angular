@@ -1,0 +1,14 @@
+.container {
+  background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
+  border-radius: 5px !important;
+
+  .form-container {
+    margin: 50px auto;
+    padding: 40px;
+
+    input {
+      border: 1px solid #6d72c3;
+      height: 50px;
+    }
+  }
+}
