@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { LandingNavbarComponent } from './components/landing-navbar/landing-navbar.component';
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
 import { PlaceholderCardComponent } from './components/placeholder-card/placeholder-card.component';
@@ -40,6 +41,7 @@ import { TokenInterceptorService } from './services/token/token-interceptor.serv
     PostCardComponent,
     DeleteModalComponent,
     PlaceholderCardComponent,
+    HowItWorksComponent,
   ],
   imports: [
     BrowserModule,
