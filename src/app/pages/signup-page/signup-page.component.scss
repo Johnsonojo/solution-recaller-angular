@@ -4,6 +4,10 @@
 
   .container {
     height: 100vh !important;
+
+    .row {
+      height: 100% !important;
+    }
   }
 
   button {
