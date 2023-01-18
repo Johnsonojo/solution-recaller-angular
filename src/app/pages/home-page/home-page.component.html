@@ -1,12 +1,23 @@
 <div class="container-fluid">
   <app-landing-navbar></app-landing-navbar>
-  <div class="container col-sm-12 col-md-6 d-flex justify-content-center mb-5">
+  <div class="container col-sm-12 col-md-6 mb-5 text-center">
     <h3 class="main-text">
-      Are you tired of constantly searching for the solutions to technical
-      problems, challenges and or blockers you have solved in the past? Well,
-      with Solution Recaller you can document and recall them at any time in the
-      future.
+      Are you tired of wasting valuable time and energy searching for solutions
+      to technical problems you've already tackled?
     </h3>
+
+    <h3 class="main-text">
+      Introducing Solution Recaller - the ultimate tool for documenting and
+      easily recalling solutions to past challenges and blockers.
+    </h3>
+
+    <h3 class="main-text">Never waste time on the same problem again!</h3>
+  </div>
+  <!-- CTA Button -->
+  <div class="d-flex justify-content-center align-items-center cta-btn">
+    <a class="btn btn-lg btn-block mt-5 mb-5" routerLink="/signup"
+      >Get Started</a
+    >
   </div>
 
   <!-- How it works -->
@@ -15,10 +26,17 @@
       <h2 class="my-5 text-center">How it works</h2>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
+    <div class="row row-cols-1 row-cols-md-3 g-5 d-flex justify-content-center">
       <div class="col" *ngFor="let item of howItWorks">
         <app-how-it-works [howItWorks]="item"></app-how-it-works>
       </div>
     </div>
+  </div>
+
+  <!-- CTA Button -->
+  <div class="d-flex justify-content-center align-items-center cta-btn">
+    <a class="btn btn-lg btn-block mt-5 mb-5" routerLink="/signup"
+      >Get Started</a
+    >
   </div>
 </div>
