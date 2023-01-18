@@ -1,6 +1,6 @@
 .container {
   background-image: linear-gradient(to bottom, #6d72c3, #cd9fcc);
-  border-radius: 5px !important;
+  border-radius: 10px !important;
 
   .form-container {
     margin: 50px auto;
@@ -9,6 +9,25 @@
     input {
       border: 1px solid #6d72c3;
       height: 50px;
+    }
+
+    .post-button {
+      background-color: #1d1128;
+
+      color: #ffffff;
+      border: 1px solid #1d1128;
+      height: 50px;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #403c4e;
+
+        color: #ffffff;
+      }
     }
   }
 }
