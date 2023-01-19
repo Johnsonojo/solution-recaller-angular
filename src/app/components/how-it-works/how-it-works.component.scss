@@ -1,4 +1,11 @@
-.step-number {
-  font-size: 30px;
-  background: -webkit-linear-gradient(#6d72c3, #585ecc);
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 5px #585ecca1;
+  padding: 20px;
+  position: relative;
+  transition: 0.5s;
+
+  .step-number {
+    color: #6d72c3;
+  }
 }

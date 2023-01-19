@@ -1,14 +1,17 @@
 <div class="card h-100">
-  <h5 class="card-title step-number text-center py-2">
+  <h3 class="card-title step-number text-center">
     {{ howItWorks.stepNumber }}
-  </h5>
+  </h3>
   <img
     src="{{ howItWorks.imageUrl }}"
     alt="{{ howItWorks.altText }}"
     class="card-img-top"
   />
   <div class="card-body">
-    <p class="card-text text-center">
+    <h4 class="card-subtitle-text text-center my-4">
+      {{ howItWorks.subTitleText }}
+    </h4>
+    <p class="card-text text-center text-secondary">
       {{ howItWorks.details }}
     </p>
   </div>

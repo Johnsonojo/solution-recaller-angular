@@ -5,6 +5,7 @@ export interface HowItWorks {
   imageUrl: string;
   altText: string;
   stepNumber: string;
+  subTitleText: string;
   details: string;
 }
 
