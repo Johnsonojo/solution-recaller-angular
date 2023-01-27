@@ -64,7 +64,7 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify({ id, firstName }));
 
         this.toast.success(res.message);
-        this.router.navigate(['/posts']);
+        return this.router.navigate(['/posts']);
       },
       error: (err) => {
         this.isLoading = false;

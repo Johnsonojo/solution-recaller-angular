@@ -38,6 +38,7 @@ export class CreatePostComponent implements OnInit {
   postForm = this.fb.group({
     problemTitle: ['', [Validators.required, Validators.minLength(20)]],
     problemDescription: ['', [Validators.required, Validators.minLength(20)]],
+    tags: ['', [Validators.required]],
     problemSolution: ['', [Validators.required, Validators.minLength(20)]],
   });
 
@@ -83,6 +84,10 @@ export class CreatePostComponent implements OnInit {
             res.data.problemDescription,
             [Validators.required, Validators.minLength(10)],
           ],
+          tags: [
+            res.data?.tags?.map((tag: any) => tag.name).join(', '),
+            [Validators.required],
+          ],
           problemSolution: [
             res.data.problemSolution,
             [Validators.required, Validators.minLength(10)],
@@ -101,32 +106,42 @@ export class CreatePostComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.postService.createPost(this.postForm.value).subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
-        this.toast.success(res.message);
-        this.router.navigate(['/posts']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.toast.error(err.error.message);
-      },
-    });
+    this.postService
+      .createPost({
+        ...this.postForm.value,
+        tags: this.postForm.value.tags?.split(', '),
+      })
+      .subscribe({
+        next: (res: any) => {
+          this.isLoading = false;
+          this.toast.success(res.message);
+          this.router.navigate(['/posts']);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.toast.error(err.error.message);
+        },
+      });
   }
 
   updatePost() {
     this.isLoading = true;
-    this.postService.updatePost(this.postId, this.postForm.value).subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
-        this.toast.success(res.message);
-        this.router.navigate([`/posts/${this.postId}`]);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.toast.error(err.error.message);
-      },
-    });
+    this.postService
+      .updatePost(this.postId, {
+        ...this.postForm.value,
+        tags: this.postForm.value.tags?.split(', '),
+      })
+      .subscribe({
+        next: (res: any) => {
+          this.isLoading = false;
+          this.toast.success(res.message);
+          this.router.navigate([`/posts/${this.postId}`]);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.toast.error(err.error.message);
+        },
+      });
   }
 
   onSubmitPost() {

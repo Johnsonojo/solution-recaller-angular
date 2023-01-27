@@ -57,7 +57,7 @@ export class SignupPageComponent implements OnInit {
       next: (data: any) => {
         this.loading = false;
         this.toast.success(data.message);
-        this.router.navigate(['/login']);
+        return this.router.navigate(['/login']);
       },
       error: (error) => {
         this.loading = false;
