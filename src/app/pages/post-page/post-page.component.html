@@ -1,8 +1,8 @@
 <app-main-navbar></app-main-navbar>
 
 <div>
-  <div class="container top-content mt-5">
-    <h2>Your Posted Solutions</h2>
+  <div class="container top-content mt-5 mb-4">
+    <h2>Your solutions</h2>
     <a
       class="btn create-button"
       routerLink="/posts/create-post"
@@ -40,6 +40,7 @@
             *ngIf="!isLoading"
             [post]="item"
             [cardColor]="getCardColor()"
+            [canChangeTheme]="true"
           ></app-post-card>
         </div>
       </div>
