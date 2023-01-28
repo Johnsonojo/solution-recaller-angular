@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post/post.service';
+import { allCardColors, pickRandomColor } from '../../shared/cardThemer';
 
 @Component({
   selector: 'app-post-page',
@@ -11,6 +12,7 @@ export class PostPageComponent implements OnInit {
   postData!: any[];
   errorMessage!: string;
   isLoading = false;
+  cardColors = allCardColors;
 
   constructor(private postService: PostService, private router: Router) {}
 
@@ -37,5 +39,9 @@ export class PostPageComponent implements OnInit {
     this.router.navigate(['posts/create-post'], {
       queryParams: { type: 'create' },
     });
+  }
+
+  getCardColor() {
+    return pickRandomColor();
   }
 }

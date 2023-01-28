@@ -1,19 +1,15 @@
 .card {
   border-radius: 10px;
-  border: 1px solid #6d72c3;
+  border: none;
 
   .tag-badge {
     margin-right: 10px;
-    background-color: #30485a;
-    color: #ffffff;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 5px;
+    font-size: 12px;
   }
 
   .btn {
-    background-color: #6d72c3;
-    color: #ffffff;
-    border: #6d72c3;
+    font-size: 16px;
+    font-weight: 500;
   }
 }

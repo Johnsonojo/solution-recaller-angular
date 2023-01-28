@@ -39,13 +39,17 @@
       </div>
     </div>
 
+    <!-- show results from search -->
     <ng-template #showResult>
       <div class="row g-6 mt-5">
         <div
           class="col-sm-12 col-md-6 col-lg-4 mb-4"
           *ngFor="let item of searchResult"
         >
-          <app-post-card [post]="item"></app-post-card>
+          <app-post-card
+            [post]="item"
+            [cardColor]="getCardColor()"
+          ></app-post-card>
         </div>
       </div>
     </ng-template>

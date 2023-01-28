@@ -25,4 +25,5 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {}
 
   @Input() post!: Post;
+  @Input() cardColor: any;
 }

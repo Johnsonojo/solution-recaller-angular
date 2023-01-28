@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PostService } from 'src/app/services/post/post.service';
+import { allCardColors, pickRandomColor } from '../../shared/cardThemer';
 
 @Component({
   selector: 'app-search-page',
@@ -11,6 +12,7 @@ export class SearchPageComponent implements OnInit {
   isLoading = false;
   searchResult!: any[];
   errorMessage!: string;
+  cardColors = allCardColors;
 
   searchForm = this.fb.group({
     searchKeyword: ['', [Validators.required]],
@@ -33,6 +35,7 @@ export class SearchPageComponent implements OnInit {
       next: (res: any) => {
         this.isLoading = false;
         this.searchResult = res.userPostsResult;
+        console.log(this.searchResult);
         this.errorMessage = '';
       },
       error: (err) => {
@@ -40,5 +43,9 @@ export class SearchPageComponent implements OnInit {
         this.errorMessage = err.error.message;
       },
     });
+  }
+
+  getCardColor() {
+    return pickRandomColor();
   }
 }
