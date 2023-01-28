@@ -63,8 +63,12 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem('session', encryptedData);
         localStorage.setItem('user', JSON.stringify({ id, firstName }));
 
-        this.toast.success(res.message);
-        return this.router.navigate(['/posts']);
+        this.toast.success(res.message, '', {
+          timeOut: 800,
+        });
+        setTimeout(() => {
+          this.router.navigate(['/posts']);
+        }, 1000);
       },
       error: (err) => {
         this.isLoading = false;

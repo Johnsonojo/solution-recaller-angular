@@ -56,8 +56,12 @@ export class SignupPageComponent implements OnInit {
     this.authService.signup(data).subscribe({
       next: (data: any) => {
         this.loading = false;
-        this.toast.success(data.message);
-        return this.router.navigate(['/login']);
+        this.toast.success(data.message, '', {
+          timeOut: 800,
+        });
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1000);
       },
       error: (error) => {
         this.loading = false;

@@ -1,7 +1,7 @@
 <app-main-navbar></app-main-navbar>
 
 <div class="container">
-  <h3 class="mt-4 mb-4 text-center">Recall a solution</h3>
+  <h3 class="mt-4 mb-4 text-center">Recall by keyword</h3>
 
   <!-- Search Form -->
   <div class="container col-sm-12 col-md-6">
@@ -22,20 +22,36 @@
           id="search-button"
           [disabled]="searchForm.invalid"
         >
-          <div class="spinner-border" role="status" *ngIf="isLoading">
+          <div
+            class="spinner-border"
+            role="status"
+            *ngIf="isKeywordSearchLoading"
+          >
             <span class="visually-hidden">Loading...</span>
           </div>
-          <span *ngIf="!isLoading">Recall</span>
+          <span *ngIf="!isKeywordSearchLoading">Recall</span>
         </button>
       </div>
     </form>
   </div>
 
+  <!-- Show Tags -->
+  <div class="container">
+    <h5 class="mt-4 mb-2 text-center">or by tag</h5>
+    <div class="container col-sm-12 col-md-6 d-flex justify-content-center">
+      <div *ngFor="let item of allTags" class="mx-2">
+        <a class="btn tag-btn btn-sm" (click)="searchByTag(item.name)">{{
+          item.name
+        }}</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Search Result -->
   <div class="container">
-    <div class="row mt-5" *ngIf="errorMessage; else showResult">
+    <div class="row mt-5" *ngIf="keywordSearchErrorMessage; else showResult">
       <div class="text-center">
-        <h4>{{ errorMessage }}</h4>
+        <h4>{{ keywordSearchErrorMessage }}</h4>
       </div>
     </div>
 
@@ -44,11 +60,12 @@
       <div class="row g-6 mt-5">
         <div
           class="col-sm-12 col-md-6 col-lg-4 mb-4"
-          *ngFor="let item of searchResult"
+          *ngFor="let item of keywordSearchResult"
         >
           <app-post-card
             [post]="item"
             [cardColor]="getCardColor()"
+            [canChangeTheme]="false"
           ></app-post-card>
         </div>
       </div>

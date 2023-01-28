@@ -20,10 +20,19 @@ export interface Post {
   styleUrls: ['./post-card.component.scss'],
 })
 export class PostCardComponent implements OnInit {
+  cardTheme = {
+    backgroundColor: '#bc9ec1',
+    textColor: '#000000',
+    buttonColor: '#000000',
+    buttonTextColor: '#ffffff',
+    tagBackgroundColor: '#ffffff',
+    tagTextColor: '#000000',
+  };
   constructor() {}
 
   ngOnInit(): void {}
 
   @Input() post!: Post;
   @Input() cardColor: any;
+  @Input() canChangeTheme!: boolean;
 }

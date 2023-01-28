@@ -9,9 +9,14 @@ import { allCardColors, pickRandomColor } from '../../shared/cardThemer';
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
-  isLoading = false;
-  searchResult!: any[];
-  errorMessage!: string;
+  isKeywordSearchLoading = false;
+  keywordSearchResult!: any[];
+  keywordSearchErrorMessage!: string;
+
+  isTagLoading = false;
+  isTagSearchLoading = false;
+  allTags!: any[];
+  tagSearchErrorMessage!: string;
   cardColors = allCardColors;
 
   searchForm = this.fb.group({
@@ -20,7 +25,9 @@ export class SearchPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private postService: PostService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchAllTags();
+  }
 
   get formControls() {
     return this.searchForm.controls;
@@ -30,22 +37,50 @@ export class SearchPageComponent implements OnInit {
     if (this.searchForm.invalid) {
       return;
     }
-    this.isLoading = true;
+    this.isKeywordSearchLoading = true;
     this.postService.searchPost(this.searchForm.value).subscribe({
       next: (res: any) => {
-        this.isLoading = false;
-        this.searchResult = res.userPostsResult;
-        console.log(this.searchResult);
-        this.errorMessage = '';
+        this.isKeywordSearchLoading = false;
+        this.keywordSearchResult = res.userPostsResult;
+        this.keywordSearchErrorMessage = '';
       },
       error: (err) => {
-        this.isLoading = false;
-        this.errorMessage = err.error.message;
+        this.isKeywordSearchLoading = false;
+        this.keywordSearchErrorMessage = err.error.message;
       },
     });
   }
 
   getCardColor() {
     return pickRandomColor();
+  }
+
+  fetchAllTags() {
+    this.isTagLoading = true;
+    this.postService.getAllTags().subscribe({
+      next: (res: any) => {
+        this.isTagLoading = false;
+        this.allTags = res.data;
+      },
+      error: (err) => {
+        this.isTagLoading = false;
+        this.tagSearchErrorMessage = err.error.message;
+      },
+    });
+  }
+
+  searchByTag(tagName: string) {
+    this.isTagSearchLoading = true;
+    this.postService.getAllPostsByTag(tagName).subscribe({
+      next: (res: any) => {
+        this.isTagSearchLoading = false;
+        this.keywordSearchResult = res.data.posts;
+        this.keywordSearchErrorMessage = '';
+      },
+      error: (err) => {
+        this.isTagSearchLoading = false;
+        this.keywordSearchErrorMessage = err.error.message;
+      },
+    });
   }
 }
