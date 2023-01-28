@@ -31,4 +31,12 @@ export class PostService {
     const { searchKeyword } = data;
     return this.http.makeGetRequest(`search/keyword/${searchKeyword}`);
   }
+
+  getAllTags() {
+    return this.http.makeGetRequest('tags');
+  }
+
+  getAllPostsByTag(tagName: string) {
+    return this.http.makeGetRequest(`tags/posts/${tagName}`);
+  }
 }
