@@ -32,14 +32,6 @@ export const allCardColors = [
     tagTextColor: '#000000',
   },
   {
-    backgroundColor: '#4df1d2',
-    textColor: '#000000',
-    buttonColor: '#000000',
-    buttonTextColor: '#ffffff',
-    tagBackgroundColor: '#ffffff',
-    tagTextColor: '#000000',
-  },
-  {
     backgroundColor: '#86e7b8',
     textColor: '#000000',
     buttonColor: '#000000',
