@@ -114,8 +114,13 @@ export class CreatePostComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.isLoading = false;
-          this.toast.success(res.message);
-          this.router.navigate(['/posts']);
+
+          this.toast.success(res.message, '', {
+            timeOut: 800,
+          });
+          setTimeout(() => {
+            this.router.navigate(['/posts']);
+          }, 1000);
         },
         error: (err) => {
           this.isLoading = false;
@@ -134,8 +139,12 @@ export class CreatePostComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.isLoading = false;
-          this.toast.success(res.message);
-          this.router.navigate([`/posts/${this.postId}`]);
+          this.toast.success(res.message, '', {
+            timeOut: 800,
+          });
+          setTimeout(() => {
+            this.router.navigate([`/posts/${this.postId}`]);
+          }, 1000);
         },
         error: (err) => {
           this.isLoading = false;

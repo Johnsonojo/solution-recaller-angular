@@ -1,4 +1,4 @@
-<div *ngIf="canChangeTheme; else showOther">
+<div *ngIf="canChangeTheme">
   <div
     class="card p-3 h-100"
     [style.background-color]="cardColor.backgroundColor"
@@ -46,50 +46,49 @@
   </div>
 </div>
 
-<ng-template #showOther>
-  <div
-    class="card p-3 h-100"
-    [style.background-color]="cardTheme.backgroundColor"
-  >
-    <div class="card-body">
-      <h5
-        class="card-title text-truncate fw-bolder"
-        [style.color]="cardTheme.textColor"
-      >
-        {{ post.problemTitle }}
-      </h5>
+<div
+  *ngIf="!canChangeTheme"
+  class="card p-3 h-100"
+  [style.background-color]="cardTheme.backgroundColor"
+>
+  <div class="card-body">
+    <h5
+      class="card-title text-truncate fw-bolder"
+      [style.color]="cardTheme.textColor"
+    >
+      {{ post.problemTitle }}
+    </h5>
 
-      <div
-        class="card-text text-truncate py-4"
-        [style.color]="cardTheme.textColor"
-        [innerHTML]="post.problemSolution.slice(0, 70) + '...'"
-      ></div>
+    <div
+      class="card-text text-truncate py-4"
+      [style.color]="cardTheme.textColor"
+      [innerHTML]="post.problemSolution.slice(0, 70) + '...'"
+    ></div>
 
-      <div class="mb-4">
-        <div class="d-flex flex-wrap align-items-center">
-          <em>
-            <span
-              class="tag-badge px-2 py-1 fw-semibold"
-              [style.background-color]="cardTheme.tagBackgroundColor"
-              [style.color]="cardTheme.tagTextColor"
-              *ngFor="let item of post.tags"
-            >
-              {{ item.name }}
-            </span>
-          </em>
-        </div>
-      </div>
-      <div class="d-flex align-items-center justify-content-center">
-        <div>
-          <a
-            href="/posts/{{ post.id }}"
-            class="btn mt-3"
-            [style.color]="cardTheme.buttonTextColor"
-            [style.background-color]="cardTheme.buttonColor"
-            >View Details</a
+    <div class="mb-4">
+      <div class="d-flex flex-wrap align-items-center">
+        <em>
+          <span
+            class="tag-badge px-2 py-1 fw-semibold"
+            [style.background-color]="cardTheme.tagBackgroundColor"
+            [style.color]="cardTheme.tagTextColor"
+            *ngFor="let item of post.tags"
           >
-        </div>
+            {{ item.name }}
+          </span>
+        </em>
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center">
+      <div>
+        <a
+          href="/posts/{{ post.id }}"
+          class="btn mt-3"
+          [style.color]="cardTheme.buttonTextColor"
+          [style.background-color]="cardTheme.buttonColor"
+          >View Details</a
+        >
       </div>
     </div>
   </div>
-</ng-template>
+</div>

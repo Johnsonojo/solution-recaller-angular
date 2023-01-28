@@ -5,13 +5,13 @@
     class="my-5 d-flex align-items-center justify-content-center"
     post="singlePost"
   >
-    <div class="mb-4">
+    <div class="mb-4 col-sm-6">
       <div *ngIf="!singlePost; else showPost" class="text-end">
         <h3>{{ errorMessage }}</h3>
       </div>
       <!-- Single Post card -->
       <ng-template #showPost>
-        <div class="single-post-wrapper col">
+        <div class="single-post-wrapper">
           <div>
             <h2 class="post-card-title fw-bolder">
               {{ singlePost?.problemTitle }}

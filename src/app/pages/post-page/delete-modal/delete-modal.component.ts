@@ -1,8 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from 'src/app/services/post/post.service';
-import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-delete-modal',
@@ -15,7 +13,6 @@ export class DeleteModalComponent implements OnInit {
   constructor(
     private postService: PostService,
     private toast: ToastrService,
-    private router: Router,
     private el: ElementRef
   ) {}
 
@@ -27,8 +24,6 @@ export class DeleteModalComponent implements OnInit {
         window.location.href = '/posts';
         // close modal
         this.el.nativeElement.querySelector('#deleteModal').modal('hide');
-        this.toast.success(res.message);
-        this.router.navigate(['/posts']);
       },
       error: (err) => {
         this.toast.error(err.error.message);
