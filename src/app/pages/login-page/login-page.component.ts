@@ -46,10 +46,6 @@ export class LoginPageComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
-
   loginUser() {
     if (this.loginForm.invalid) {
       return;
