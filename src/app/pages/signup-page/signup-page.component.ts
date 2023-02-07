@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
+
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
@@ -43,10 +44,6 @@ export class SignupPageComponent implements OnInit {
 
   get formControls() {
     return this.signupForm.controls;
-  }
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
   }
 
   signupUser() {
