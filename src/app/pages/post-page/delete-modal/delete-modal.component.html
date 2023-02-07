@@ -16,23 +16,15 @@
         ></button>
       </div>
       <div class="modal-body">
-        <h3>Sure you want to delete this post?</h3>
+        <h4 class="text-center">Sure you want to delete this post?</h4>
       </div>
       <div
-        class="modal-footer d-flex justify-content-evenly align-items-center"
+        class="modal-footer d-flex justify-content-evenly align-items-center button-wrapper"
       >
-        <button
-          type="button"
-          class="btn btn-success px-4"
-          (click)="onDeletePost()"
-        >
+        <button type="button" class="btn yes-btn px-4" (click)="onDeletePost()">
           Yes
         </button>
-        <button
-          type="button"
-          class="btn btn-danger px-4"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" class="btn no-btn px-4" data-bs-dismiss="modal">
           No
         </button>
       </div>

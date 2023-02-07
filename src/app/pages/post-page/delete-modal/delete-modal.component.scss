@@ -1,0 +1,17 @@
+.button-wrapper {
+  .yes-btn {
+    background-color: #ffffff !important;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #6d72c3 !important;
+    color: #6d72c3;
+  }
+
+  .no-btn {
+    background-color: #6d72c3 !important;
+    border: none !important;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    outline: none;
+    color: #ffffff;
+  }
+}
