@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatAiComponent } from './pages/chat-ai/chat-ai.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { CreatePostComponent } from './pages/post-page/create-post/create-post.component';
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'posts/:postId',
     component: SinglePostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'chat',
+    component: ChatAiComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },

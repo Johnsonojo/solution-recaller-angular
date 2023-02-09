@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkdownModule } from 'ngx-markdown';
 import { QuillModule } from 'ngx-quill';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -14,6 +15,7 @@ import { LandingNavbarComponent } from './components/landing-navbar/landing-navb
 import { MainNavbarComponent } from './components/main-navbar/main-navbar.component';
 import { PlaceholderCardComponent } from './components/placeholder-card/placeholder-card.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { ChatAiComponent } from './pages/chat-ai/chat-ai.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -42,6 +44,7 @@ import { TokenInterceptorService } from './services/token/token-interceptor.serv
     DeleteModalComponent,
     PlaceholderCardComponent,
     HowItWorksComponent,
+    ChatAiComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { TokenInterceptorService } from './services/token/token-interceptor.serv
       progressBar: true,
     }),
     QuillModule.forRoot(),
+    MarkdownModule.forRoot(),
   ],
   providers: [
     {
