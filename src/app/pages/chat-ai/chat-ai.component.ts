@@ -33,18 +33,18 @@ export class ChatAiComponent implements OnInit {
 
     this.isLoaded = true;
 
-    const lastApiMessage = this.messages
-      .filter((message: any) => message.sender === 'api')
-      .pop();
+    // const lastApiMessage = this.messages
+    //   .filter((message: any) => message.sender === 'apiMessage')
+    //   .pop();
 
-    const lastApiMessageContent = lastApiMessage ? lastApiMessage.content : '';
+    // const lastApiMessageContent = lastApiMessage ? lastApiMessage.content : '';
 
-    const conversationData = {
-      api: lastApiMessageContent,
-      user: this.chatForm.value.message,
-    };
+    // const conversationData = {
+    //   api: lastApiMessageContent,
+    //   user: this.chatForm.value.message,
+    // };
 
-    this.openaiService.getCompletion(conversationData).subscribe({
+    this.openaiService.getCompletion(this.chatForm.value).subscribe({
       next: (res: any) => {
         this.isLoaded = false;
         this.messages.push({
