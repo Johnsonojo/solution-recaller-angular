@@ -1,16 +1,25 @@
 <app-main-navbar></app-main-navbar>
-
 <div>
   <div class="container top-content mt-5 mb-4">
     <h2>Your solutions</h2>
-    <a
-      class="btn create-button"
-      routerLink="/posts/create-post"
-      routerLinkActive="active"
-      [queryParams]="{ type: 'create' }"
-      type="button"
-      >Create</a
-    >
+    <div>
+      <a
+        class="btn create-button"
+        routerLink="/posts/create-post"
+        routerLinkActive="active"
+        [queryParams]="{ type: 'create' }"
+        type="button"
+        >Create</a
+      >
+
+      <!-- <a
+        class="btn create-button"
+        routerLink="/chat"
+        routerLinkActive="active"
+        type="button"
+        >Ask AI</a
+      > -->
+    </div>
   </div>
 
   <div class="container">
