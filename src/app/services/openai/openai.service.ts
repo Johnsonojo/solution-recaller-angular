@@ -7,7 +7,7 @@ import { HttpService } from '../http/http.service';
 export class OpenaiService {
   constructor(private http: HttpService) {}
 
-  getCompletion(data: any) {
+  getChatCompletion(data: any) {
     return this.http.makePostRequest('chat', data);
   }
 }
