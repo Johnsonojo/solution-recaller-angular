@@ -63,7 +63,7 @@ export class LoginPageComponent implements OnInit {
           timeOut: 800,
         });
         setTimeout(() => {
-          this.router.navigate(['/posts']);
+          window.location.href = '/posts';
         }, 1000);
       },
       error: (err) => {
