@@ -93,4 +93,8 @@ export const getTokensFromStorage = () => {
   };
 };
 
+export const getUserFromStorage = () => {
+  return JSON.parse(getFromStorage('user'));
+};
+
 /* tslint:enable */
