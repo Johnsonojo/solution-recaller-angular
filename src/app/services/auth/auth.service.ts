@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getTokensFromStorage } from 'src/app/utils';
+import { getTokensFromStorage, getUserFromStorage } from 'src/app/utils';
 import { HttpService } from '../http/http.service';
 
 @Injectable({
@@ -7,6 +7,7 @@ import { HttpService } from '../http/http.service';
 })
 export class AuthService {
   tokens = getTokensFromStorage();
+  userDetails = getUserFromStorage();
 
   constructor(private http: HttpService) {}
 
@@ -33,5 +34,9 @@ export class AuthService {
 
   getAuthToken() {
     return this.tokens.accessToken;
+  }
+
+  getUserDetails() {
+    return this.userDetails;
   }
 }

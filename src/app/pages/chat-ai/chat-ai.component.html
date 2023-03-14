@@ -1,34 +1,57 @@
 <app-main-navbar></app-main-navbar>
 
-<div class="container col-6">
-  <form [formGroup]="chatForm" (ngSubmit)="onGetCompletion()">
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        id="message"
-        formControlName="message"
-        placeholder="Ask a question"
-      />
-    </div>
-    <button type="submit" class="btn btn-primary">Send</button>
-  </form>
-
+<div class="container col-sm-12 col-md-6">
   <div class="chat-dialogue">
     <div class="chat-message" *ngFor="let message of messages">
-      <div
-        class="message-sender"
-        [ngClass]="{
-          'sender-user': message.sender === 'user',
-          'sender-api': message.sender === 'api'
-        }"
-      >
-        {{ message.sender }}
+      <div class="message-sender">
+        <ng-container *ngIf="message.role === 'user'; else assistantAvatar">
+          <div class="avatar user-avatar">
+            {{ userDetails.firstName.substring(0, 2).toUpperCase() }}
+          </div>
+        </ng-container>
+        <ng-template #assistantAvatar>
+          <div class="avatar assistant-avatar">AI</div>
+        </ng-template>
       </div>
       <markdown [data]="message.content"> </markdown>
-      <!-- <div class="ql-editor fs-6" [innerHTML]="message.content"></div> -->
-      <!-- <quill-view [content]="message.content"></quill-view> -->
     </div>
+    <p *ngIf="isLoading" class="text-center">Loading...</p>
     <p *ngIf="errorMessage" class="aler alert-danger">{{ errorMessage }}</p>
+  </div>
+
+  <div class="form-wrapper mt-5">
+    <form
+      [formGroup]="chatForm"
+      (ngSubmit)="onGetChatConversation()"
+      class="col-sm-12 col-md-8"
+    >
+      <div
+        class="d-flex align-items-center justify-content-center button-wrapper p-2"
+        *ngIf="showRegenerateBtn"
+      >
+        <button
+          class="btn btn-primary"
+          (click)="onRegenerateChatConversation()"
+        >
+          Regenerate Response
+        </button>
+      </div>
+      <div class="wrapper rounded p-3 d-flex flex-row align-items-end">
+        <textarea
+          class="form-control border-0"
+          id="message"
+          formControlName="message"
+          tabindex="0"
+          rows="1"
+          (keydown.enter)="onGetChatConversation()"
+        ></textarea>
+        <div>
+          <i
+            class="fas fa-paper-plane fa-1x cursor-pointer"
+            (click)="onGetChatConversation()"
+          ></i>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
