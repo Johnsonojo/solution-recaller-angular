@@ -57,7 +57,7 @@ export class SignupPageComponent implements OnInit {
           timeOut: 800,
         });
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          window.location.href = '/login';
         }, 1000);
       },
       error: (error) => {
