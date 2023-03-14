@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { OpenaiService } from 'src/app/services/openai/openai.service';
 
 @Component({
@@ -13,48 +14,69 @@ export class ChatAiComponent implements OnInit {
   });
 
   messages: any = [];
-  isLoaded = false;
+  isLoading = false;
   chatAnswer = '';
   errorMessage = '';
+  userDetails!: any;
+  showRegenerateBtn = false;
 
-  constructor(private fb: FormBuilder, private openaiService: OpenaiService) {}
+  constructor(
+    private fb: FormBuilder,
+    private openaiService: OpenaiService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userDetails = this.authService.getUserDetails() || '';
+  }
 
   get formControls() {
     return this.chatForm.controls;
   }
 
-  onGetCompletion() {
+  onGetChatConversation() {
+    this.isLoading = true;
     this.messages.push({
-      sender: 'user',
+      role: 'user',
       content: this.chatForm.value.message,
     });
 
-    this.isLoaded = true;
+    // set the form value to local storage
+    localStorage.setItem('chatFormValue', JSON.stringify(this.chatForm.value));
 
-    // const lastApiMessage = this.messages
-    //   .filter((message: any) => message.sender === 'apiMessage')
-    //   .pop();
-
-    // const lastApiMessageContent = lastApiMessage ? lastApiMessage.content : '';
-
-    // const conversationData = {
-    //   api: lastApiMessageContent,
-    //   user: this.chatForm.value.message,
-    // };
-
-    this.openaiService.getCompletion(this.chatForm.value).subscribe({
+    this.openaiService.getChatCompletion(this.chatForm.value).subscribe({
       next: (res: any) => {
-        this.isLoaded = false;
-        this.messages.push({
-          sender: 'api',
-          content: res.answer,
-        });
+        this.isLoading = false;
+        // clear the form
         this.chatForm.reset();
+        this.messages = [...this.messages, res.answer];
+        this.showRegenerateBtn = true;
       },
       error: (err) => {
-        this.isLoaded = false;
+        this.isLoading = false;
+        this.errorMessage = err.error.message;
+      },
+    });
+  }
+
+  onRegenerateChatConversation() {
+    this.isLoading = true;
+    this.showRegenerateBtn = false;
+    // remove the last ai message
+    this.messages.pop();
+
+    // get the form value from local storage
+    const chatFormValue = JSON.parse(
+      localStorage.getItem('chatFormValue') || '{}'
+    );
+    this.openaiService.getChatCompletion(chatFormValue).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        this.messages = [...this.messages, res.answer];
+        this.showRegenerateBtn = true;
+      },
+      error: (err) => {
+        this.isLoading = false;
         this.errorMessage = err.error.message;
       },
     });
