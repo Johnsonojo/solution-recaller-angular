@@ -24,9 +24,7 @@ export class SignupPageComponent implements OnInit {
       [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(
-          '^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'
-        ),
+        Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'),
       ],
     ],
   });
